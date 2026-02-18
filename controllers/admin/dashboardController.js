@@ -10,7 +10,8 @@ exports.index = async (req, res) => {
         const timeline = await Timeline.findAll();
 
         // Fetch Visitor Stats
-        const visitorStats = await VisitorLog.getStats();
+        // Fetch Visitor Stats
+        const visitorStats = await VisitorLog.getStats() || {};
 
         // Prepare Recent Items
         const recentProjects = projects.slice(0, 5);

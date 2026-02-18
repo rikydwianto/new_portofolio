@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router(); // Router init
 const upload = require('../middlewares/uploadMiddleware');
 const { ensureAuthenticated } = require('../middlewares/authMiddleware');
 
