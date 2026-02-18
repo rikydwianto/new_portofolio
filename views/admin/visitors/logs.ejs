@@ -1,0 +1,74 @@
+<div class="admin-page">
+    <div class="page-header">
+        <h1>Visitor Logs</h1>
+        <a href="/admin/visitors" class="btn btn-sm btn-outline">← Back to Analytics</a>
+    </div>
+
+    <div class="analytics-card full-width">
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date & Time</th>
+                        <th>IP Address</th>
+                        <th>City</th>
+                        <th>Region</th>
+                        <th>Country</th>
+                        <th>ISP</th>
+                        <th>Page Visited</th>
+                        <th>Project</th>
+                        <th>Referrer</th>
+                        <th>User Agent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% logs.forEach((log, i)=> { %>
+                        <tr>
+                            <td>
+                                <%= i + 1 %>
+                            </td>
+                            <td class="text-nowrap">
+                                <%= new Date(log.visited_at).toLocaleString('en-GB') %>
+                            </td>
+                            <td><code><%= log.ip_address %></code></td>
+                            <td>
+                                <%= log.city || '-' %>
+                            </td>
+                            <td>
+                                <%= log.region || '-' %>
+                            </td>
+                            <td>
+                                <%= log.country || '-' %>
+                            </td>
+                            <td class="text-muted text-sm">
+                                <%= log.isp || '-' %>
+                            </td>
+                            <td><code><%= log.page_visited %></code></td>
+                            <td>
+                                <% if (log.project_slug) { %>
+                                    <span class="badge badge-blue">
+                                        <%= log.project_slug %>
+                                    </span>
+                                    <% } else { %>
+                                        -
+                                        <% } %>
+                            </td>
+                            <td class="text-sm text-muted">
+                                <%= log.referrer ? log.referrer.substring(0, 40) : '-' %>
+                            </td>
+                            <td class="text-sm text-muted" title="<%= log.user_agent %>">
+                                <%= log.user_agent ? log.user_agent.substring(0, 50) + '...' : '-' %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                            <% if (logs.length===0) { %>
+                                <tr>
+                                    <td colspan="11" class="text-center text-muted">No visitor logs recorded yet</td>
+                                </tr>
+                                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

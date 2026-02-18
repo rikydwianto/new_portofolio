@@ -1,0 +1,172 @@
+<div class="admin-page">
+    <div class="page-header">
+        <h1>Visitor Analytics</h1>
+        <a href="/admin/visitors/logs" class="btn btn-sm btn-outline">View All Logs</a>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card stat-blue">
+            <div class="stat-card-icon">👁️</div>
+            <div class="stat-card-info">
+                <span class="stat-card-number">
+                    <%= stats.totalVisits %>
+                </span>
+                <span class="stat-card-label">Total Page Views</span>
+            </div>
+        </div>
+        <div class="stat-card stat-purple">
+            <div class="stat-card-icon">👤</div>
+            <div class="stat-card-info">
+                <span class="stat-card-number">
+                    <%= stats.uniqueVisitors %>
+                </span>
+                <span class="stat-card-label">Unique Visitors</span>
+            </div>
+        </div>
+        <div class="stat-card stat-green">
+            <div class="stat-card-icon">📅</div>
+            <div class="stat-card-info">
+                <span class="stat-card-number">
+                    <%= stats.todayVisits %>
+                </span>
+                <span class="stat-card-label">Today's Visits</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="analytics-grid">
+        <!-- Top Pages -->
+        <div class="analytics-card">
+            <h3>🔥 Most Visited Pages</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th>Views</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stats.topPages.forEach(page=> { %>
+                        <tr>
+                            <td><code><%= page.page_visited %></code></td>
+                            <td><span class="badge badge-blue">
+                                    <%= page.visits %>
+                                </span></td>
+                        </tr>
+                        <% }) %>
+                            <% if (stats.topPages.length===0) { %>
+                                <tr>
+                                    <td colspan="2" class="text-muted">No data yet</td>
+                                </tr>
+                                <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Top Countries -->
+        <div class="analytics-card">
+            <h3>🌍 Visitors by Country</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>Visits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stats.topCountries.forEach(c=> { %>
+                        <tr>
+                            <td>
+                                <%= c.country %>
+                            </td>
+                            <td><span class="badge badge-green">
+                                    <%= c.visits %>
+                                </span></td>
+                        </tr>
+                        <% }) %>
+                            <% if (stats.topCountries.length===0) { %>
+                                <tr>
+                                    <td colspan="2" class="text-muted">No data yet</td>
+                                </tr>
+                                <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Project Views -->
+        <div class="analytics-card">
+            <h3>📁 Most Viewed Projects</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Views</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stats.projectViews.forEach(p=> { %>
+                        <tr>
+                            <td>
+                                <%= p.project_slug %>
+                            </td>
+                            <td><span class="badge badge-purple">
+                                    <%= p.views %>
+                                </span></td>
+                        </tr>
+                        <% }) %>
+                            <% if (stats.projectViews.length===0) { %>
+                                <tr>
+                                    <td colspan="2" class="text-muted">No project views yet</td>
+                                </tr>
+                                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Recent Visitors -->
+    <div class="analytics-card full-width">
+        <h3>🕐 Recent Visitors</h3>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>IP Address</th>
+                        <th>Location</th>
+                        <th>Page</th>
+                        <th>ISP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stats.recentVisitors.forEach(v=> { %>
+                        <tr>
+                            <td class="text-nowrap">
+                                <%= new Date(v.visited_at).toLocaleString('en-GB', { day: '2-digit' , month: 'short' ,
+                                    hour: '2-digit' , minute: '2-digit' }) %>
+                            </td>
+                            <td><code><%= v.ip_address %></code></td>
+                            <td>
+                                <% if (v.city && v.city !=='Localhost' ) { %>
+                                    <%= v.city %>, <%= v.country %>
+                                            <% } else { %>
+                                                <span class="text-muted">Local</span>
+                                                <% } %>
+                            </td>
+                            <td><code><%= v.page_visited %></code></td>
+                            <td class="text-muted">
+                                <%= v.isp || '-' %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                            <% if (stats.recentVisitors.length===0) { %>
+                                <tr>
+                                    <td colspan="5" class="text-muted">No visitors yet</td>
+                                </tr>
+                                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

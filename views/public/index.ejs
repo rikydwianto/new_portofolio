@@ -1,0 +1,272 @@
+<!-- ═══════ HERO ═══════ -->
+<section id="hero" class="hero-section">
+    <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="container hero-container">
+        <div class="hero-content">
+            <% if(profile.available_for_work) { %>
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    Available for freelance work
+                </div>
+                <% } %>
+                    <h1 class="hero-title">
+                        <%- profile.hero_title %>
+                    </h1>
+                    <div class="typewriter-wrapper">
+                        <span class="typewriter-prefix">I build </span>
+                        <span class="typewriter-text" id="typewriter"></span>
+                        <span class="typewriter-cursor">|</span>
+                    </div>
+                    <p class="hero-description">
+                        <%- profile.hero_desc %>
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#portfolio" class="btn btn-primary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            View My Work
+                        </a>
+                        <a href="<%= profile.whatsapp_url %>" target="_blank" class="btn btn-outline">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                </path>
+                            </svg>
+                            Let's Talk
+                        </a>
+                    </div>
+                    <div class="hero-social">
+                        <% if(profile.github_url) { %>
+                            <a href="<%= profile.github_url %>" target="_blank" class="social-icon" title="GitHub">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                    </path>
+                                </svg>
+                            </a>
+                            <% } %>
+                                <% if(profile.linkedin_url) { %>
+                                    <a href="<%= profile.linkedin_url %>" target="_blank" class="social-icon"
+                                        title="LinkedIn">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path
+                                                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                            </path>
+                                            <rect x="2" y="9" width="4" height="12"></rect>
+                                            <circle cx="4" cy="4" r="2"></circle>
+                                        </svg>
+                                    </a>
+                                    <% } %>
+                                        <% if(profile.whatsapp_url) { %>
+                                            <a href="<%= profile.whatsapp_url %>" target="_blank" class="social-icon"
+                                                title="WhatsApp">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                                    </path>
+                                                </svg>
+                                            </a>
+                                            <% } %>
+                                                <% if(profile.email) { %>
+                                                    <a href="mailto:<%= profile.email %>" class="social-icon"
+                                                        title="Email">
+                                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2">
+                                                            <path
+                                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                            </path>
+                                                            <polyline points="22,6 12,13 2,6"></polyline>
+                                                        </svg>
+                                                    </a>
+                                                    <% } %>
+                    </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-shape">
+                <div class="profile-circle">
+                    <img src="/images/profile_pic.png" alt="Profile" class="profile-img">
+                </div>
+                <% badges.forEach((badge, index)=> { %>
+                    <div class="orbit orbit-<%= index + 1 %>">
+                        <div class="floating-badge <%= badge.css_class %>">
+                            <%= badge.text %>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Pass dynamic typewriter text to JS
+    window.typewriterPhrases = <% - profile.typewriter_text || '[]' %>;
+</script>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="about-wrapper">
+            <div class="about-left">
+                <span class="section-label">About Me</span>
+                <h2 class="section-heading"><%- profile.about_title %></h2>
+                <div class="about-text-content">
+                    <p class="about-text">
+                        <%- profile.about_desc_1 %>
+                    </p>
+                    <p class="about-text">
+                        <%- profile.about_desc_2 %>
+                    </p>
+                </div>
+            </div>
+            <div class="about-right">
+                <div class="skills-showcase">
+                    <% skills.forEach(skill=> { %>
+                        <div class="skill-card">
+                            <div class="skill-icon <%= skill.color_class %>">
+                                <%- skill.icon_svg %>
+                            </div>
+                            <h4>
+                                <%= skill.title %>
+                            </h4>
+                            <p>
+                                <%= skill.description %>
+                            </p>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+        <div class="about-stats">
+            <% stats.forEach(stat=> { %>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="<%= stat.number %>">0</span><span class="stat-suffix">
+                        <%= stat.suffix %>
+                    </span>
+                    <span class="stat-label">
+                        <%= stat.label %>
+                    </span>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ TIMELINE ═══════ -->
+<section id="timeline" class="section bg-alt">
+    <div class="container">
+        <div class="section-header-center">
+            <span class="section-label">My Journey</span>
+            <h2 class="section-heading center">Career Timeline</h2>
+        </div>
+
+        <div class="timeline">
+            <% timeline.forEach((item, index)=> { %>
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-year">
+                                <%= item.year_range %>
+                            </span>
+                            <span class="timeline-type type-<%= item.type %>">
+                                <%= item.type %>
+                            </span>
+                        </div>
+                        <h3 class="timeline-role">
+                            <%= item.title %>
+                        </h3>
+                        <h4 class="timeline-company">
+                            <%= item.subtitle %>
+                        </h4>
+                        <% if(item.description) { %>
+                            <p class="timeline-desc">
+                                <%= item.description %>
+                            </p>
+                            <% } %>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ PORTFOLIO ═══════ -->
+<section id="portfolio" class="section">
+    <div class="container">
+        <div class="section-header-center">
+            <span class="section-label">My Work</span>
+            <h2 class="section-heading center">Featured Projects</h2>
+        </div>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <% categories.forEach(cat=> { %>
+                <button class="filter-btn" data-filter="<%= cat.id %>">
+                    <%= cat.name %>
+                </button>
+                <% }) %>
+        </div>
+
+        <div class="portfolio-grid">
+            <% projects.forEach(project=> { %>
+                <article class="project-card" data-category="<%= project.category_id %>">
+                    <div class="card-image">
+                        <img src="<%= project.thumbnail %>" alt="<%= project.title %>" loading="lazy"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('no-image');">
+                        <div class="card-overlay">
+                            <a href="/project/<%= project.slug %>" class="card-view-btn">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                View Detail
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="card-category">
+                                <%= project.category_name %>
+                            </span>
+                            <span class="card-type type-badge-<%= project.media_type %>">
+                                <%= project.media_type.replace('_', ' ' ) %>
+                            </span>
+                        </div>
+                        <h3 class="card-title"><a href="/project/<%= project.slug %>">
+                                <%= project.title %>
+                            </a></h3>
+                        <p class="card-excerpt">
+                            <%= project.excerpt %>
+                        </p>
+                        <% if(project.tech_stack) { %>
+                            <div class="card-tech">
+                                <% project.tech_stack.split(',').slice(0, 4).forEach(tech=> { %>
+                                    <span class="tech-pill">
+                                        <%= tech.trim() %>
+                                    </span>
+                                    <% }) %>
+                            </div>
+                            <% } %>
+                    </div>
+                </article>
+                <% }) %>
+        </div>
+    </div>
+</section>

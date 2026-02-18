@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Categories</h1>
+    <a href="/admin/categories/create" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Add New Category
+    </a>
+</div>
+
+<div class="card shadow-sm p-4">
+    <table class="table table-striped table-bordered table-hover datatable" style="width:100%">
+        <thead class="table-dark">
+            <tr>
+                <th style="width: 50px;">ID</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% categories.forEach(category=> { %>
+                <tr>
+                    <td>
+                        <%= category.id %>
+                    </td>
+                    <td><span class="fw-bold text-primary">
+                            <%= category.name %>
+                        </span></td>
+                    <td><code><%= category.slug %></code></td>
+                    <td class="action-buttons">
+                        <a href="/admin/categories/<%= category.id %>/edit" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="/admin/categories/<%= category.id %>?_method=DELETE" method="POST"
+                            class="d-inline delete-form">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>

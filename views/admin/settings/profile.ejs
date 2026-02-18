@@ -1,0 +1,114 @@
+<div class="admin-page">
+    <div class="page-header">
+        <h1>Website Settings</h1>
+    </div>
+
+    <%- include('../../partials/settings-nav') %>
+
+        <form action="/admin/settings/profile" method="POST" class="admin-form full-width">
+            <h3 class="mb-4">Basic Info</h3>
+            <div class="row-2 no-gap">
+                <div class="form-group">
+                    <label>Display Name</label>
+                    <input type="text" name="name" value="<%= profile.name %>" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" value="<%= profile.email %>">
+                </div>
+            </div>
+
+            <h3 class="mb-4 mt-6">Hero Section & Typewriter</h3>
+
+            <div class="form-group">
+                <label>Hero Title (Supports HTML)</label>
+                <textarea name="hero_title" rows="2"><%= profile.hero_title %></textarea>
+                <small class="text-muted">Use <code>&lt;span class="gradient-text"&gt;Text&lt;/span&gt;</code> for
+                    gradient effect.</small>
+            </div>
+
+            <div class="form-group">
+                <label>Hero Description</label>
+                <textarea name="hero_desc" rows="3"><%= profile.hero_desc %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Typewriter Phrases (One per line)</label>
+                <textarea name="typewriter_text" rows="6"
+                    placeholder="Web Developer&#10;Mobile Developer"><%= typewriterPhrases %></textarea>
+            </div>
+
+            <h3 class="mb-4 mt-6">About Section</h3>
+            <div class="form-group">
+                <label>About Title</label>
+                <input type="text" name="about_title" value="<%= profile.about_title %>">
+            </div>
+
+            <div class="form-group">
+                <label>About Paragraph 1 (Supports HTML)</label>
+                <textarea name="about_desc_1" rows="4"><%= profile.about_desc_1 %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>About Paragraph 2 (Supports HTML)</label>
+                <textarea name="about_desc_2" rows="4"><%= profile.about_desc_2 %></textarea>
+            </div>
+
+            <h3 class="mb-4 mt-6">Contact & Social Links</h3>
+            <div class="row-2 no-gap">
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone" value="<%= profile.phone %>">
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp Link</label>
+                    <input type="url" name="whatsapp_url" value="<%= profile.whatsapp_url %>">
+                </div>
+                <div class="form-group">
+                    <label>GitHub URL</label>
+                    <input type="url" name="github_url" value="<%= profile.github_url %>">
+                </div>
+                <div class="form-group">
+                    <label>LinkedIn URL</label>
+                    <input type="url" name="linkedin_url" value="<%= profile.linkedin_url %>">
+                </div>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" name="available_for_work" <%=profile.available_for_work ? 'checked' : '' %>>
+                    Show "Available for freelance work" badge
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg mt-4">Save Changes</button>
+        </form>
+</div>
+
+<style>
+    .full-width {
+        max-width: 100%;
+    }
+
+    .row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .mt-6 {
+        margin-top: 2.5rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+    }
+
+    textarea {
+        font-family: monospace;
+        font-size: 0.85rem;
+    }
+</style>

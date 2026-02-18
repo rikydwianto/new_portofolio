@@ -1,0 +1,27 @@
+<div class="dashboard-header">
+    <h1>Dashboard</h1>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Projects</h3>
+        <p class="stat-number">
+            <%= projectsCount %>
+        </p>
+        <a href="/admin/projects">Manage Projects &rarr;</a>
+    </div>
+    <div class="stat-card">
+        <h3>Categories</h3>
+        <p class="stat-number">
+            <%= categoriesCount %>
+        </p>
+        <a href="/admin/categories">Manage Categories &rarr;</a>
+    </div>
+    <div class="stat-card">
+        <h3>Timeline Entries</h3>
+        <p class="stat-number">
+            <%= timelineCount %>
+        </p>
+        <a href="/admin/timeline">Manage Timeline &rarr;</a>
+    </div>
+</div>

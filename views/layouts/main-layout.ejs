@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="<%= (typeof profile !== 'undefined' && profile.hero_desc) ? profile.hero_desc.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 160) : 'Professional Portfolio of Riky Dwianto - Full Stack Developer' %>">
+    <meta name="author"
+        content="<%= (typeof profile !== 'undefined' && profile.name) ? profile.name : 'Riky Dwianto' %>">
+    <meta name="keywords" content="Portfolio, Full Stack Developer, Web Developer, Mobile Developer, Riky Dwianto">
+
+    <!-- Open Graph / WhatsApp Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:3232/">
+    <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Riky Dwianto - Portfolio' %>">
+    <meta property="og:description"
+        content="<%= (typeof profile !== 'undefined' && profile.hero_desc) ? profile.hero_desc.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 160) : 'Explore my projects and skills.' %>">
+    <meta property="og:image" content="http://localhost:3232/images/profile_pic.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://localhost:3232/">
+    <meta property="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Riky Dwianto - Portfolio' %>">
+    <meta property="twitter:description"
+        content="<%= (typeof profile !== 'undefined' && profile.hero_desc) ? profile.hero_desc.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 160) : 'Explore my projects and skills.' %>">
+    <meta property="twitter:image" content="http://localhost:3232/images/profile_pic.png">
+    <title>
+        <%= typeof title !=='undefined' ? title : 'Riky Dwianto - Portfolio' %>
+    </title>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+    <%- include('../partials/navbar') %>
+
+        <main>
+            <%- body %>
+        </main>
+
+        <%- include('../partials/footer') %>
+
+            <script src="/js/app.js"></script>
+</body>
+
+</html>

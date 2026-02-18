@@ -1,0 +1,19 @@
+<% let initials='RD' ; if(profile && profile.name) { initials=profile.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    }
+%>
+<nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+        <a href="/" class="logo"><%= initials %><span class="dot">.</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,11 @@
+node_modules/
+.env
+database/backups/*.json
+database/backups/
+public/uploads/
+.DS_Store
+Thumbs.db
+npm-debug.log
+yarn-error.log
+.idea/
+.vscode/

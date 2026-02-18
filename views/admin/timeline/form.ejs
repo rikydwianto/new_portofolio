@@ -1,0 +1,73 @@
+<% // Helper to safely access timeline item properties const isEdit=(typeof item !=='undefined' && item); const p=isEdit
+    ? item : {}; %>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>
+            <%= isEdit ? 'Edit Timeline' : 'New Timeline Entry' %>
+        </h1>
+        <a href="/admin/timeline" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form action="/admin/timeline<%= isEdit ? '/' + p.id + '?_method=PUT' : '' %>" method="POST">
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="year_range" class="form-label">Year Range</label>
+                        <input type="text" class="form-control" id="year_range" name="year_range"
+                            value="<%= p.year_range || '' %>" placeholder="e.g. 2020 - Present" required>
+                        <div class="form-text">Format: "YYYY - YYYY" or "YYYY - Present"</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="type" class="form-label">Type</label>
+                        <select name="type" id="type" class="form-select">
+                            <option value="experience" <%=(p.type==='experience' ) ? 'selected' : '' %>>Experience
+                            </option>
+                            <option value="education" <%=(p.type==='education' ) ? 'selected' : '' %>>Education</option>
+                            <option value="certification" <%=(p.type==='certification' ) ? 'selected' : '' %>
+                                >Certification</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="title" class="form-label">Title (Role / Degree)</label>
+                        <input type="text" class="form-control" id="title" name="title" value="<%= p.title || '' %>"
+                            placeholder="e.g. Senior Backend Engineer" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="subtitle" class="form-label">Subtitle (Company / University)</label>
+                        <input type="text" class="form-control" id="subtitle" name="subtitle"
+                            value="<%= p.subtitle || '' %>" placeholder="e.g. Google Inc." required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="order_index" class="form-label">Sort Order</label>
+                    <input type="number" class="form-control" id="order_index" name="order_index"
+                        value="<%= p.order_index || 0 %>">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description (Bullet points recommended)</label>
+                    <!-- Summernote Editor -->
+                    <textarea id="description" name="description" class="form-control summernote"
+                        rows="4"><%= p.description || '' %></textarea>
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="/admin/timeline" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i>
+                        <%= isEdit ? 'Update Entry' : 'Create Entry' %>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>

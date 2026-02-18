@@ -1,0 +1,27 @@
+<aside class="sidebar">
+        <div class="sidebar-header">
+                <h3>Admin Panel</h3>
+        </div>
+        <ul class="sidebar-menu">
+                <li><a href="/admin/dashboard"
+                                class="<%= typeof currentPage !== 'undefined' && currentPage === 'dashboard' ? 'active' : (typeof active !== 'undefined' && active === 'dashboard' ? 'active' : '') %>">📊
+                                Dashboard</a></li>
+                <li><a href="/admin/projects"
+                                class="<%= typeof currentPage !== 'undefined' && currentPage === 'projects' ? 'active' : (typeof active !== 'undefined' && active === 'projects' ? 'active' : '') %>">📁
+                                Projects</a></li>
+                <li><a href="/admin/categories"
+                                class="<%= typeof currentPage !== 'undefined' && currentPage === 'categories' ? 'active' : (typeof active !== 'undefined' && active === 'categories' ? 'active' : '') %>">🏷️
+                                Categories</a></li>
+                <li><a href="/admin/timeline"
+                                class="<%= typeof currentPage !== 'undefined' && currentPage === 'timeline' ? 'active' : (typeof active !== 'undefined' && active === 'timeline' ? 'active' : '') %>">📅
+                                Timeline</a></li>
+                <li><a href="/admin/visitors"
+                                class="<%= typeof currentPage !== 'undefined' && currentPage === 'visitors' ? 'active' : '' %>">👁️
+                                Visitors</a></li>
+                <li><a href="/admin/settings/profile"
+                                class="<%= typeof currentPage !== 'undefined' && currentPage === 'settings' ? 'active' : '' %>">⚙️
+                                Settings</a></li>
+                <li class="sidebar-divider"></li>
+                <li><a href="/admin/logout" class="logout-link">🚪 Logout</a></li>
+        </ul>
+</aside>
