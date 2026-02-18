@@ -5,98 +5,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Riky Dwianto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <style>
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: #F3F4F6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: #0F172A;
+            /* Dark Theme matching sidebar */
             height: 100vh;
-            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
         }
 
-        .login-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            /* Very subtle shadow just for lifting */
-            width: 350px;
+        /* Ambient Background Effect */
+        .ambient-light {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
         }
 
-        h2 {
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            /* Glass effect */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-header {
             text-align: center;
-            color: #111827;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        .login-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(59, 130, 246, 0.2);
+            color: #3B82F6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1.5rem;
         }
 
-        label {
-            display: block;
+        .login-title {
+            color: #fff;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            color: #4B5563;
         }
 
-        input {
-            width: 100%;
-            padding: 0.75rem;
-            border: none;
-            background-color: #F3F4F6;
-            border-radius: 4px;
-            box-sizing: border-box;
+        .login-subtitle {
+            color: #94A3B8;
+            font-size: 0.95rem;
         }
 
-        button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #2563EB;
-            color: white;
+        .form-control {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            /* Left padding for icon */
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            color: #fff;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748B;
+            transition: color 0.2s;
+        }
+
+        .form-floating:focus-within .input-icon {
+            color: #3B82F6;
+        }
+
+        .btn-login {
+            background: #3B82F6;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            padding: 0.9rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+            transition: all 0.2s;
         }
 
-        button:hover {
-            background-color: #1d4ed8;
+        .btn-login:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         .alert {
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-            text-align: center;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #FCA5A5;
             font-size: 0.9rem;
         }
 
-        .alert-danger {
-            background-color: #fee2e2;
-            color: #b91c1c;
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link a {
+            color: #64748B;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .back-link a:hover {
+            color: #fff;
+        }
+
+        ::placeholder {
+            color: #475569 !important;
         }
     </style>
 </head>
 
 <body>
-    <div class="login-container">
-        <h2>Admin Login</h2>
+
+    <div class="ambient-light"></div>
+
+    <div class="login-card">
+        <div class="login-header">
+            <div class="login-icon">
+                <i class="bi bi-shield-lock-fill"></i>
+            </div>
+            <h3 class="login-title">Welcome Back</h3>
+            <p class="login-subtitle">Enter your credentials to access the admin panel.</p>
+        </div>
+
         <%- include('../partials/messages') %>
+
             <form action="/admin/login" method="POST">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
+                <div class="mb-4 position-relative">
+                    <i class="bi bi-person input-icon"></i>
+                    <input type="text" class="form-control" name="username" placeholder="Username" required
+                        autocomplete="off">
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+
+                <div class="mb-4 position-relative">
+                    <i class="bi bi-key input-icon"></i>
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
                 </div>
-                <button type="submit">Login</button>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-login">
+                        Sign In <i class="bi bi-arrow-right ms-2"></i>
+                    </button>
+                </div>
             </form>
+
+            <div class="back-link">
+                <a href="/"><i class="bi bi-arrow-left me-1"></i> Back to Portfolio</a>
+            </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

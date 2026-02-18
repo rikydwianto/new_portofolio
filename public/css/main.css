@@ -1498,3 +1498,23 @@ img {
         font-size: 0.8rem;
     }
 }
+/* ADDITIONS FOR REDESIGN */
+.text-justify { text-align: justify; }
+.hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.hover-lift:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
+.gradient-text { background: linear-gradient(135deg, var(--primary) 0%, #a855f7 50%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.shadow-hover:hover { box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4); transform: translateY(-2px); }
+
+/* ZIG-ZAG TIMELINE FOR DESKTOP */
+@media (min-width: 769px) {
+    .timeline { max-width: 1000px; padding: 0; }
+    .timeline::before { left: 50%; transform: translateX(-50%); }
+    .timeline-item { width: 50%; padding: 0 40px; margin-bottom: 0; }
+    .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+    .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+    .timeline-item:nth-child(odd) .timeline-marker { left: auto; right: -50px; justify-content: flex-end; }
+    .timeline-item:nth-child(even) .timeline-marker { left: -50px; justify-content: flex-start; }
+    .timeline-item:nth-child(odd) .marker-dot { margin-right: -7px; }
+    .timeline-item:nth-child(even) .marker-dot { margin-left: -7px; }
+    .timeline-item:nth-child(odd) .timeline-card-header { flex-direction: row-reverse; }
+}

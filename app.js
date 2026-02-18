@@ -24,11 +24,27 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Session Config
+const MySQLStore = require('express-mysql-session')(session);
+
+const sessionStore = new MySQLStore({
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    clearExpired: true,
+    checkExpirationInterval: 900000,
+    expiration: 86400000 * 7,
+    createDatabaseTable: true
+});
+
 app.use(session({
+    key: 'portfolio_session',
     secret: process.env.SESSION_SECRET || 'secret',
+    store: sessionStore,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 } // 7 days
 }));
 
 app.use(flash());
@@ -39,6 +55,7 @@ app.use((req, res, next) => {
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     res.locals.user = req.session.user || null;
+    res.locals.path = req.path;
     next();
 });
 

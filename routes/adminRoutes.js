@@ -16,6 +16,10 @@ router.get('/login', authController.loginForm);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
+// Account Management (Edit Profile/Password)
+router.get('/account', ensureAuthenticated, authController.accountForm);
+router.post('/account', ensureAuthenticated, authController.updateAccount);
+
 // Dashboard (Protected)
 router.get('/dashboard', ensureAuthenticated, dashboardController.index);
 

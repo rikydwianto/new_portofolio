@@ -1,42 +1,47 @@
-<div class="settings-nav">
-    <a href="/admin/settings/profile"
-        class="nav-item <%= typeof activeTab !== 'undefined' && activeTab === 'profile' ? 'active' : '' %>">👤 Profile &
-        Hero</a>
-    <a href="/admin/settings/stats"
-        class="nav-item <%= typeof activeTab !== 'undefined' && activeTab === 'stats' ? 'active' : '' %>">📊 Stats</a>
-    <a href="/admin/settings/badges"
-        class="nav-item <%= typeof activeTab !== 'undefined' && activeTab === 'badges' ? 'active' : '' %>">💫 Orbit
-        Badges</a>
-    <a href="/admin/settings/skills"
-        class="nav-item <%= typeof activeTab !== 'undefined' && activeTab === 'skills' ? 'active' : '' %>">🛠️ Skill
-        Cards</a>
+<div class="card mb-4">
+    <div class="card-body p-0">
+        <ul class="nav nav-pills p-2 gap-1">
+            <li class="nav-item">
+                <a class="nav-link <%= activeTab === 'profile' ? 'active' : '' %>" href="/admin/settings/profile">
+                    <i class="bi bi-person-badge me-2"></i> Profile & SEO
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= activeTab === 'skills' ? 'active' : '' %>" href="/admin/settings/skills">
+                    <i class="bi bi-tools me-2"></i> Skills
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= activeTab === 'stats' ? 'active' : '' %>" href="/admin/settings/stats">
+                    <i class="bi bi-bar-chart-fill me-2"></i> Statistics
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= activeTab === 'badges' ? 'active' : '' %>" href="/admin/settings/badges">
+                    <i class="bi bi-award-fill me-2"></i> Badges
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
+
 <style>
-    .settings-nav {
-        display: flex;
-        gap: 0.5rem;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #E2E8F0;
-        padding-bottom: 1rem;
-        overflow-x: auto;
-    }
-
-    .nav-item {
-        padding: 0.5rem 1rem;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 0.9rem;
+    .nav-pills .nav-link {
         color: #64748B;
-        white-space: nowrap;
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 0.75rem 1.25rem;
+        transition: all 0.2s;
     }
 
-    .nav-item:hover {
+    .nav-pills .nav-link:hover {
         background: #F1F5F9;
-        color: #334155;
+        color: #0F172A;
     }
 
-    .nav-item.active {
-        background: #E0E7FF;
-        color: #4F46E5;
+    .nav-pills .nav-link.active {
+        background: #3B82F6;
+        color: white;
+        box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5);
     }
 </style>
