@@ -20,13 +20,30 @@ exports.index = async (req, res) => {
 
         res.render('public/index', {
             layout: 'layouts/main-layout',
-            projects,
+            projects: projects.slice(0, 6), // Limit to 6 latest projects
             categories,
             timeline,
             stats,
             skills,
             badges,
             title: 'Riky Dwianto - Portfolio'
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+};
+
+exports.listProjects = async (req, res) => {
+    try {
+        const projects = await Project.findAll();
+        const categories = await Category.findAll();
+
+        res.render('public/projects', {
+            layout: 'layouts/main-layout',
+            projects,
+            categories,
+            title: 'All Projects - Riky Dwianto'
         });
     } catch (err) {
         console.error(err);

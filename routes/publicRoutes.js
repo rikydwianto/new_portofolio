@@ -3,6 +3,7 @@ const router = express.Router();
 const mainController = require('../controllers/public/mainController');
 
 router.get('/', mainController.index);
+router.get('/projects', mainController.listProjects); // List All Projects
 router.get('/project/:slug', mainController.detail);
 router.get('/cv/download', mainController.downloadCV);
 

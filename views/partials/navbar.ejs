@@ -5,16 +5,18 @@
     <div class="container navbar-container">
         <a href="/" class="logo"><%= initials %><span class="dot">.</span></a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/projects" class="<%= (typeof title !== ' undefined' && title.includes('All Projects'))
+    ? 'active' : '' %>">Projects</a></li>
+    <li><a href="/#timeline">Timeline</a></li>
+    <li><a href="/#portfolio">Featured</a></li>
+    <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-</nav>
+    </div>
+    </nav>

@@ -1,0 +1,143 @@
+<!-- ═══════ HEADER ═══════ -->
+<section class="section pt-5 pb-3 bg-alt">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Explore My Projects</h1>
+        <p class="lead text-muted">A collection of my work in Web, Mobile, and AI Development.</p>
+    </div>
+</section>
+
+<!-- ═══════ PORTFOLIO GRID ═══════ -->
+<section id="portfolio" class="section pt-0">
+    <div class="container">
+
+        <!-- Filter Buttons -->
+        <div class="filter-bar mb-5 d-flex justify-content-center flex-wrap gap-2">
+            <button class="filter-btn active btn btn-outline-primary rounded-pill px-4" data-filter="all">All
+                Projects</button>
+            <% categories.forEach(cat=> { %>
+                <button class="filter-btn btn btn-outline-secondary rounded-pill px-4" data-filter="<%= cat.id %>">
+                    <%= cat.name %>
+                </button>
+                <% }) %>
+        </div>
+
+        <div class="row g-4 portfolio-grid">
+            <% projects.forEach(project=> { %>
+                <article class="col-md-6 col-lg-4 project-item" data-category="<%= project.category_id %>">
+                    <div class="card h-100 border-0 shadow-sm hover-lift project-card">
+                        <div class="card-image position-relative overflow-hidden rounded-top" style="height: 240px;">
+                            <img src="<%= project.thumbnail %>" alt="<%= project.title %>"
+                                class="w-100 h-100 object-fit-cover"
+                                onerror="this.src='https://via.placeholder.com/600x400';">
+                            <div
+                                class="card-overlay position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center opacity-0 transition-opacity">
+                                <a href="/project/<%= project.slug %>" class="btn btn-light rounded-pill px-4 fw-bold">
+                                    View Detail
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-START mb-2">
+                                <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 small">
+                                    <%= project.category_name %>
+                                </span>
+                                <span
+                                    class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill px-2 py-1 small text-uppercase">
+                                    <%= project.media_type ? project.media_type.replace('_', ' ' ) : 'Web' %>
+                                </span>
+                            </div>
+                            <h5 class="card-title fw-bold mb-2">
+                                <a href="/project/<%= project.slug %>"
+                                    class="text-decoration-none text-dark stretched-link">
+                                    <%= project.title %>
+                                </a>
+                            </h5>
+                            <p class="card-text text-muted small mb-3">
+                                <%= project.excerpt %>
+                            </p>
+                            <% if(project.tech_stack) { %>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <% project.tech_stack.split(',').slice(0, 3).forEach(tech=> { %>
+                                        <span class="badge bg-light text-dark border fw-normal">
+                                            <%= tech.trim() %>
+                                        </span>
+                                        <% }) %>
+                                            <% if(project.tech_stack.split(',').length> 3) { %>
+                                                <span class="badge bg-light text-muted border fw-normal">+<%=
+                                                        project.tech_stack.split(',').length - 3 %></span>
+                                                <% } %>
+                                </div>
+                                <% } %>
+                        </div>
+                    </div>
+                </article>
+                <% }) %>
+        </div>
+
+        <% if(projects.length===0) { %>
+            <div class="text-center py-5">
+                <h3 class="text-muted">No projects found.</h3>
+            </div>
+            <% } %>
+
+    </div>
+</section>
+
+<script>
+    // Simple Client-Side Filtering Script
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Active Class Management
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'btn-primary', 'text-white');
+                    b.classList.add('btn-outline-secondary');
+                });
+                btn.classList.add('active', 'btn-primary', 'text-white');
+                btn.classList.remove('btn-outline-secondary');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.classList.remove('d-none');
+                        // Add fade-in animation re-trigger here if desired
+                    } else {
+                        item.classList.add('d-none');
+                    }
+                });
+            });
+        });
+
+        // Activate "All" by default visually
+        const allBtn = document.querySelector('[data-filter="all"]');
+        if (allBtn) {
+            allBtn.classList.remove('btn-outline-secondary');
+            allBtn.classList.add('btn-primary', 'text-white');
+        }
+    });
+</script>
+
+<style>
+    /* Hover Lift Effect */
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Overlay Effect */
+    .project-card:hover .card-overlay {
+        opacity: 1 !important;
+    }
+
+    .transition-opacity {
+        transition: opacity 0.3s ease;
+    }
+</style>
