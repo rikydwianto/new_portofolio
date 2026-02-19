@@ -1,102 +1,123 @@
-<% var isEdit=false; var p={}; if (typeof project !=='undefined' && project) { isEdit=true; p=project; } %>
+<% const isEdit=(typeof project !=='undefined' && project); const p=isEdit ? project : {}; %>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>
-            <%= isEdit ? 'Edit Project' : 'New Project' %>
-        </h1>
-        <a href="/admin/projects" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Back to List
-        </a>
-    </div>
-
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <form action="/admin/projects<%= isEdit ? '/' + p.id + '?_method=PUT' : '' %>" method="POST"
-                enctype="multipart/form-data">
-
-                <div class="row mb-3">
-                    <div class="col-md-9">
-                        <label for="title" class="form-label">Project Title</label>
-                        <input type="text" class="form-control" id="title" name="title" value="<%= p.title || '' %>"
-                            required>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="category_id" class="form-label">Category</label>
-                        <select name="category_id" id="category_id" class="form-select select2">
-                            <% categories.forEach(function(cat) { %>
-                                <option value="<%= cat.id %>" <%=(p.category_id==cat.id) ? 'selected' : '' %>><%=
-                                        cat.name %>
-                                </option>
-                                <% }); %>
-                        </select>
-                    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-<%= isEdit ? 'pencil-square' : 'plus-circle' %> me-2"></i>
+                        <%= isEdit ? 'Edit Project' : 'Create New Project' %>
+                    </h5>
+                    <a href="/admin/projects" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-1"></i> Back to List
+                    </a>
                 </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="tech_stack" class="form-label">Tech Stack (Tags)</label>
-                        <input type="text" class="form-control" id="tech_stack" name="tech_stack"
-                            value="<%= p.tech_stack || '' %>" placeholder="e.g. Node.js, Express, MySQL">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="excerpt" class="form-label">Excerpt (Short Summary)</label>
-                        <input type="text" class="form-control" id="excerpt" name="excerpt"
-                            value="<%= p.excerpt || '' %>" placeholder="Brief description for card view...">
-                    </div>
-                </div>
+                <div class="card-body p-4">
+                    <form action="/admin/projects<%= isEdit ? '/' + p.id + '?_method=PUT' : '' %>" method="POST"
+                        enctype="multipart/form-data">
 
-                <div class="mb-3">
-                    <label for="description" class="form-label">Full Description</label>
-                    <!-- Summernote Editor -->
-                    <textarea id="description" name="description" class="form-control summernote" rows="6"
-                        required><%= p.description || '' %></textarea>
-                </div>
+                        <div class="row g-4 mb-4">
+                            <!-- Left Column: Details -->
+                            <div class="col-md-8">
+                                <div class="card bg-light border-0 p-3 h-100">
+                                    <h6 class="text-uppercase text-muted fw-bold mb-3 small">Project Details</h6>
 
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="media_type" class="form-label">Media Type</label>
-                        <select name="media_type" id="media_type" class="form-select">
-                            <option value="web_link" <%=(p.media_type=='web_link' ) ? 'selected' : '' %>>Web Link
-                            </option>
-                            <option value="video" <%=(p.media_type=='video' ) ? 'selected' : '' %>>Video Embed</option>
-                            <option value="image" <%=(p.media_type=='image' ) ? 'selected' : '' %>>Image Gallery
-                            </option>
-                            <option value="pdf" <%=(p.media_type=='pdf' ) ? 'selected' : '' %>>PDF Presentation</option>
-                        </select>
-                    </div>
-                    <div class="col-md-8">
-                        <label for="media_url" class="form-label">Media URL / Embed Source</label>
-                        <input type="text" class="form-control" id="media_url" name="media_url"
-                            value="<%= p.media_url || '' %>" placeholder="https://example.com or <iframe>...</iframe>">
-                    </div>
-                </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-medium">Project Title <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="title"
+                                            value="<%= p.title || '' %>" required
+                                            placeholder="e.g. E-Commerce Platform">
+                                    </div>
 
-                <div class="mb-4">
-                    <label for="thumbnail" class="form-label">Thumbnail Image</label>
-                    <% if(isEdit && p.thumbnail) { %>
-                        <div class="mb-2 p-2 border rounded bg-light d-inline-block">
-                            <img src="<%= p.thumbnail %>" alt="Current Thumbnail" class="img-fluid"
-                                style="max-height: 150px;">
-                            <div class="form-text mt-1">Current Image</div>
-                            <input type="hidden" name="existing_thumbnail" value="<%= p.thumbnail %>">
-                        </div>
-                        <% } %>
-                            <input type="file" class="form-control" id="thumbnail" name="thumbnail" <%=isEdit ? ''
-                                : 'required' %>>
-                            <div class="form-text">Recommended size: 600x400px (JPG/PNG). <%= isEdit
-                                    ? 'Leave empty to keep current image.' : '' %>
+                                    <div class="row g-2 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-medium">Category <span
+                                                    class="text-danger">*</span></label>
+                                            <select name="category_id" class="form-select select2" required>
+                                                <option value="">Select Category...</option>
+                                                <% categories.forEach(function(cat) { %>
+                                                    <option value="<%= cat.id %>" <%=(p.category_id==cat.id)
+                                                        ? 'selected' : '' %>>
+                                                        <%= cat.name %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-medium">Tech Stack</label>
+                                            <input type="text" class="form-control" name="tech_stack"
+                                                value="<%= p.tech_stack || '' %>" placeholder="Node.js, React, MySQL">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-0">
+                                        <label class="form-label fw-medium">Excerpt (Card Summary)</label>
+                                        <textarea class="form-control" name="excerpt" rows="2"
+                                            placeholder="Brief description for grid view..."><%= p.excerpt || '' %></textarea>
+                                    </div>
+                                </div>
                             </div>
-                </div>
 
-                <hr>
+                            <!-- Right Column: Media -->
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0 p-3 h-100">
+                                    <h6 class="text-uppercase text-muted fw-bold mb-3 small">Media Assets</h6>
 
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="/admin/projects" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save"></i>
-                        <%= isEdit ? 'Update Project' : 'Create Project' %>
-                    </button>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-medium">Thumbnail Image</label>
+                                        <% if(isEdit && p.thumbnail) { %>
+                                            <div class="mb-2 position-relative">
+                                                <img src="<%= p.thumbnail %>" class="img-fluid rounded border bg-white"
+                                                    style="max-height: 120px; width: 100%; object-fit: cover;">
+                                            </div>
+                                            <% } %>
+                                                <input type="file" class="form-control form-control-sm" name="thumbnail"
+                                                    <%=isEdit ? '' : 'required' %>>
+                                                <div class="form-text small">Recommended: 600x400px (JPG/PNG).</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label fw-medium">Media Type</label>
+                                        <select name="media_type" class="form-select form-select-sm">
+                                            <option value="web_link" <%=(p.media_type==='web_link' ) ? 'selected' : ''
+                                                %>>Website Link</option>
+                                            <option value="video" <%=(p.media_type==='video' ) ? 'selected' : '' %>
+                                                >Video Embed</option>
+                                            <option value="image" <%=(p.media_type==='image' ) ? 'selected' : '' %>
+                                                >Image Gallery</option>
+                                            <option value="pdf" <%=(p.media_type==='pdf' ) ? 'selected' : '' %>>PDF
+                                                Document</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-0">
+                                        <label class="form-label fw-medium">Media URL / Source</label>
+                                        <input type="text" class="form-control form-control-sm" name="media_url"
+                                            value="<%= p.media_url || '' %>" placeholder="https://...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-medium">Full Description (Markdown/HTML Supported)</label>
+                            <textarea name="description" class="form-control summernote"
+                                rows="8"><%= p.description || '' %></textarea>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="/admin/projects" class="btn btn-light px-4">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-save me-2"></i> Save Project
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
